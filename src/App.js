@@ -1,11 +1,11 @@
 import React from 'react';
 import './global.css';
-import NavBar from './Components/Navbar/NavBar';
+import Main from './Components/Page1/Page1';
 import Routes from './routes';
 
 function App() {
   return (
-    <NavBar />
+    <Routes />
   );
 }
 

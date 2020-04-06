@@ -1,16 +1,34 @@
 .navbar-container {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 105px;
   height: 900px;
-  left: 0px;
-  top: 0px;
   background: linear-gradient(180deg, #000000 0%, #B5B5B5 100%);
 }
 
-.navbar-container p {
+.navbar-container div {
+  width: 105px;
+  height: 85px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
 
+.navbar-container > p {
+  margin-top: 19px;
+  margin-bottom: 45px;
+  font-size: 18px;
+}
+
+.navbar-container p {
   font-size: 16px;
   line-height: 22px;
   color: #ffffff;
+}
 
+.navbar-container img {
+  margin-bottom: 10px;
 }
