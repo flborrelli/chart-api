@@ -4,7 +4,7 @@ import "./pie-chart.css";
 import { Pie } from "react-chartjs-2";
 import { useState } from "react";
 
-function BarsChart() {
+function PieChart() {
   const [chartPieData, setChartPieData] = useState([]);
 
   const values = chartPieData.map((e) => e.value);
@@ -83,4 +83,4 @@ function BarsChart() {
   );
 }
 
-export default BarsChart;
+export default PieChart;
