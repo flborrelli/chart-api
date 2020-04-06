@@ -21,7 +21,7 @@ function LineChart() {
         label: "Today",
         data: todayValues,
 
-        backgroundColor: "rgba(0,0,0,0)",
+        // backgroundColor: "rgba(0,0,0,0)",
         borderColor: "#303F9F",
       },
       {
@@ -52,6 +52,13 @@ function LineChart() {
   const options = {
     maintainAspectRatio: false,
     responsive: true,
+    legend: {
+      labels: {
+        usePointStyle: true,
+        fontColor: '#4A4A4A',
+      },
+      align: 'end'
+    },
     title: {
       text: "LINE CHART 2 DATA",
       display: true,
@@ -65,18 +72,16 @@ function LineChart() {
         {
           ticks: {
             autoSkip: true,
-            maxTicksLimit: 10,
+            // maxTicksLimit: 10,
             beginAtZero: true,
           },
           gridLines: {
-            display: false,
           },
         },
       ],
       xAxes: [
         {
           gridLines: {
-            display: false,
           },
         },
       ],

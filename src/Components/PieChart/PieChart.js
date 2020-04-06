@@ -15,8 +15,8 @@ function PieChart() {
     datasets: [
       {
         label: "Bars Chart",
-        backgroundColor: "#03A9F4",
         data: values,
+        backgroundColor: ['#DBECF8','#2C82BE','#32B88B']
       },
     ],
   };
@@ -38,6 +38,12 @@ function PieChart() {
   const options = {
     maintainAspectRatio: false,
     responsive: true,
+    legend: {
+      labels: {
+        usePointStyle: true,
+        fontColor: '#4A4A4A',
+      }, 
+      align: 'end'},
     title: {
       text: "PIE CHART",
       display: true,

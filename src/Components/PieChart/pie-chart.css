@@ -7,3 +7,7 @@
   border-radius: 4px;
   border: #D8DDE6 1px solid;
 }
+
+canvas {
+  padding-bottom: 30px;
+}
