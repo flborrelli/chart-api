@@ -5,3 +5,7 @@
   font-size: 48px;
   color: #001B36;
 }
+
+.page1-container > div {
+  display: flex;
+}

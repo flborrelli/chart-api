@@ -1,33 +1,17 @@
 import React, { useEffect } from "react";
-import barsAPI from "../../services/barsAPI";
-import "./bars-chart.css";
-import { Bar } from "react-chartjs-2";
+import pieAPI from "../../services/pieAPI";
+import "./pie-chart.css";
+import { Pie } from "react-chartjs-2";
 import { useState } from "react";
 
 function BarsChart() {
-  const [chartBarData, setChartBarData] = useState([]);
+  const [chartPieData, setChartPieData] = useState([]);
 
-  const values = chartBarData.map((e) => e.value);
-  const months = chartBarData.map(
-    (e) =>
-      e.label.charAt(0).toUpperCase() + e.label.substring(1).substring(0, 2)
-  );
+  const values = chartPieData.map((e) => e.value);
+  const legend = chartPieData.map((e) => e.label);
 
-  useEffect(() => {
-    getBarsAPI();
-  }, []);
-
-  const getBarsAPI = async () => {
-    try {
-      const response = await barsAPI.get();
-      setChartBarData(response.data);
-    } catch (err) {
-      console.log("An error occurs while fetching bars API:", err);
-    }
-  };
-
-  const barsData = {
-    labels: months,
+  const pieData = {
+    labels: legend,
     datasets: [
       {
         label: "Bars Chart",
@@ -37,14 +21,25 @@ function BarsChart() {
     ],
   };
 
+  useEffect(() => {
+    getPieAPI();
+  }, []);
+
+  const getPieAPI = async () => {
+    try {
+      const response = await pieAPI.get();
+      setChartPieData(response.data);
+      console.log(response.data);
+    } catch (err) {
+      console.log("An error occurs while fetching pie API:", err);
+    }
+  };
+
   const options = {
     maintainAspectRatio: false,
     responsive: true,
-    legend: {
-      display: false,
-    },
     title: {
-      text: "BARS CHART",
+      text: "PIE CHART",
       display: true,
       fontColor: "#035A27",
       fontSize: 14,
@@ -54,6 +49,7 @@ function BarsChart() {
     scales: {
       yAxes: [
         {
+          display: false,
           ticks: {
             autoSkip: true,
             maxTicksLimit: 10,
@@ -66,20 +62,21 @@ function BarsChart() {
       ],
       xAxes: [
         {
+          display: false,
           gridLines: {
             display: false,
           },
         },
       ],
-    },
-  }
+    }
+    }
 
   return (
     <>
-      <div className="bars-container">
-        <Bar
-          data={barsData}
-          options={options}
+      <div className="pie-container">
+        <Pie
+          data={pieData}
+        options={options}
         />
       </div>
     </>
