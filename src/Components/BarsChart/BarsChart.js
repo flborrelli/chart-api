@@ -7,12 +7,6 @@ import { useState } from "react";
 function BarsChart() {
   const [chartBarData, setChartBarData] = useState([]);
 
-  const values = chartBarData.map((e) => e.value);
-  const months = chartBarData.map(
-    (e) =>
-      e.label.charAt(0).toUpperCase() + e.label.substring(1).substring(0, 2)
-  );
-
   useEffect(() => {
     getBarsAPI();
   }, []);
@@ -25,6 +19,12 @@ function BarsChart() {
       console.log("An error occurs while fetching bars API:", err);
     }
   };
+
+  const values = chartBarData.map((e) => e.value);
+  const months = chartBarData.map(
+    (e) =>
+      e.label.charAt(0).toUpperCase() + e.label.substring(1).substring(0, 2)
+  );
 
   const barsData = {
     labels: months,
@@ -48,7 +48,7 @@ function BarsChart() {
       display: true,
       fontColor: "#035A27",
       fontSize: 14,
-      position: 'top',
+      position: "top",
       padding: 35,
     },
     scales: {
@@ -72,15 +72,12 @@ function BarsChart() {
         },
       ],
     },
-  }
+  };
 
   return (
     <>
       <div className="bars-container">
-        <Bar
-          data={barsData}
-          options={options}
-        />
+        <Bar data={barsData} options={options} />
       </div>
     </>
   );

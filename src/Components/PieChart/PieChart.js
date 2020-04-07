@@ -10,17 +10,6 @@ function PieChart() {
   const values = chartPieData.map((e) => e.value);
   const legend = chartPieData.map((e) => e.label);
 
-  const pieData = {
-    labels: legend,
-    datasets: [
-      {
-        label: "Bars Chart",
-        data: values,
-        backgroundColor: ['#DBECF8','#2C82BE','#32B88B']
-      },
-    ],
-  };
-
   useEffect(() => {
     getPieAPI();
   }, []);
@@ -35,21 +24,33 @@ function PieChart() {
     }
   };
 
+  const pieData = {
+    labels: legend,
+    datasets: [
+      {
+        label: "Bars Chart",
+        data: values,
+        backgroundColor: ["#DBECF8", "#2C82BE", "#32B88B"],
+      },
+    ],
+  };
+
   const options = {
     maintainAspectRatio: false,
     responsive: true,
     legend: {
       labels: {
         usePointStyle: true,
-        fontColor: '#4A4A4A',
-      }, 
-      align: 'end'},
+        fontColor: "#4A4A4A",
+      },
+      align: "end",
+    },
     title: {
       text: "PIE CHART",
       display: true,
       fontColor: "#035A27",
       fontSize: 14,
-      position: 'top',
+      position: "top",
       padding: 35,
     },
     scales: {
@@ -74,16 +75,13 @@ function PieChart() {
           },
         },
       ],
-    }
-    }
+    },
+  };
 
   return (
     <>
       <div className="pie-container">
-        <Pie
-          data={pieData}
-        options={options}
-        />
+        <Pie data={pieData} options={options} />
       </div>
     </>
   );

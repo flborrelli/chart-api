@@ -8,11 +8,23 @@ function LineChart() {
   const [chartLineTodayData, setChartLineTodayData] = useState([]);
   const [chartLineYesterdayData, setChartLineYesterdayData] = useState([]);
 
+  useEffect(() => {
+    getLineAPI();
+  }, []);
+
+  const getLineAPI = async () => {
+    try {
+      const response = await lineAPI.get();
+      setChartLineTodayData(response.data.today);
+      setChartLineYesterdayData(response.data.yesterday);
+    } catch (err) {
+      console.log("An error occurs while fetching line API:", err);
+    }
+  };
 
   const todayValues = chartLineTodayData.map((e) => e.value);
   const yesterdayValues = chartLineYesterdayData.map((e) => e.value);
   const time = chartLineTodayData.map((e) => e.label);
-  // const yesterdayTime = chartLineYesterdayData.map((e) => e.label);
 
   const lineData = {
     labels: time,
@@ -21,7 +33,7 @@ function LineChart() {
         label: "Today",
         data: todayValues,
 
-        // backgroundColor: "rgba(0,0,0,0)",
+        backgroundColor: "rgba(0,0,0,0)",
         borderColor: "#303F9F",
       },
       {
@@ -34,37 +46,30 @@ function LineChart() {
     ],
   };
 
-  useEffect(() => {
-    getLineAPI();
-  }, []);
-
-  const getLineAPI = async () => {
-    try {
-      const response = await lineAPI.get();
-      setChartLineTodayData(response.data.today);
-      setChartLineYesterdayData(response.data.yesterday);
-      console.log(response.data.today);
-    } catch (err) {
-      console.log("An error occurs while fetching line API:", err);
-    }
-  };
-
   const options = {
     maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 20,
+        right: 20,
+        top: 0,
+        bottom: 30,
+      },
+    },
     responsive: true,
     legend: {
       labels: {
         usePointStyle: true,
-        fontColor: '#4A4A4A',
+        fontColor: "#4A4A4A",
       },
-      align: 'end'
+      align: "end",
     },
     title: {
       text: "LINE CHART 2 DATA",
       display: true,
       fontColor: "#035A27",
       fontSize: 14,
-      position: 'top',
+      position: "top",
       padding: 35,
     },
     scales: {
@@ -72,29 +77,23 @@ function LineChart() {
         {
           ticks: {
             autoSkip: true,
-            // maxTicksLimit: 10,
             beginAtZero: true,
           },
-          gridLines: {
-          },
+          gridLines: {},
         },
       ],
       xAxes: [
         {
-          gridLines: {
-          },
+          gridLines: {},
         },
       ],
-    }
-    }
+    },
+  };
 
   return (
     <>
       <div className="line-container">
-        <Line
-          data={lineData}
-        options={options}
-        />
+        <Line data={lineData} options={options} />
       </div>
     </>
   );

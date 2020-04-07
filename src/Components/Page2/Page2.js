@@ -9,7 +9,7 @@ function Page2() {
     <NavBar />
     <div className="page2-container">
       <h2>Page 2</h2>
-    <LineChart />
+      <LineChart />
     </div>
     </>
     
