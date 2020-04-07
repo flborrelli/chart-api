@@ -3,9 +3,11 @@ import pieAPI from "../../services/pieAPI";
 import "./pie-chart.css";
 import { Pie } from "react-chartjs-2";
 import { useState } from "react";
+import Loader from "react-loader-spinner";
 
 function PieChart() {
   const [chartPieData, setChartPieData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const values = chartPieData.map((e) => e.value);
   const legend = chartPieData.map((e) => e.label);
@@ -18,7 +20,7 @@ function PieChart() {
     try {
       const response = await pieAPI.get();
       setChartPieData(response.data);
-      console.log(response.data);
+      setLoading(false);
     } catch (err) {
       console.log("An error occurs while fetching pie API:", err);
     }
@@ -80,9 +82,22 @@ function PieChart() {
 
   return (
     <>
-      <div className="pie-container">
-        <Pie data={pieData} options={options} />
-      </div>
+      {
+        <div className="pie-container">
+          {loading ? (
+            <div className="loader">
+              <Loader
+                type="ThreeDots"
+                color="#00BFFF"
+                height={300}
+                width={300}
+              />
+            </div>
+          ) : (
+            <Pie data={pieData} options={options} />
+          )}
+        </div>
+      }
     </>
   );
 }

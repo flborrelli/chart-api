@@ -3,10 +3,14 @@ import lineAPI from "../../services/lineAPI";
 import "./line-chart.css";
 import { Line } from "react-chartjs-2";
 import { useState } from "react";
+import Loader from 'react-loader-spinner';
+
 
 function LineChart() {
   const [chartLineTodayData, setChartLineTodayData] = useState([]);
   const [chartLineYesterdayData, setChartLineYesterdayData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     getLineAPI();
@@ -17,6 +21,7 @@ function LineChart() {
       const response = await lineAPI.get();
       setChartLineTodayData(response.data.today);
       setChartLineYesterdayData(response.data.yesterday);
+      setLoading(false);
     } catch (err) {
       console.log("An error occurs while fetching line API:", err);
     }
@@ -93,7 +98,19 @@ function LineChart() {
   return (
     <>
       <div className="line-container">
+      {(loading) ?
+      <div className="loader">
+      <Loader
+      type="ThreeDots"
+       color="#00BFFF"
+       height={300}
+       width={300}
+       
+      /> 
+      </div> :
         <Line data={lineData} options={options} />
+      }
+        
       </div>
     </>
   );

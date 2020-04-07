@@ -3,9 +3,11 @@ import barsAPI from "../../services/barsAPI";
 import "./bars-chart.css";
 import { Bar } from "react-chartjs-2";
 import { useState } from "react";
+import Loader from "react-loader-spinner";
 
 function BarsChart() {
   const [chartBarData, setChartBarData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getBarsAPI();
@@ -15,6 +17,7 @@ function BarsChart() {
     try {
       const response = await barsAPI.get();
       setChartBarData(response.data);
+      setLoading(false);
     } catch (err) {
       console.log("An error occurs while fetching bars API:", err);
     }
@@ -77,7 +80,13 @@ function BarsChart() {
   return (
     <>
       <div className="bars-container">
-        <Bar data={barsData} options={options} />
+        {loading ? (
+          <div className="loader">
+            <Loader type="ThreeDots" color="#00BFFF" height={300} width={300} />
+          </div>
+        ) : (
+          <Bar data={barsData} options={options} />
+        )}
       </div>
     </>
   );
