@@ -17,6 +17,7 @@ function BarsChart() {
     try {
       const response = await barsAPI.get();
       setChartBarData(response.data);
+      console.log(response.data)
       setLoading(false);
     } catch (err) {
       console.log("An error occurs while fetching bars API:", err);
